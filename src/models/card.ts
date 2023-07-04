@@ -4,6 +4,7 @@ import {
   ObjectId,
   Types,
 } from 'mongoose';
+import {REGEX} from '../types/constants'
 
 interface ICard {
   name: string;
@@ -22,6 +23,12 @@ const cardSchema = new Schema({
   },
   link: {
     type: String,
+    validate: {
+      validator(url: string) {
+        return REGEX.test(url);
+      },
+      message: 'Неверный адрес изображения для карточки',
+    },
     required: true,
   },
   owner: {
