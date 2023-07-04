@@ -18,7 +18,7 @@ const handleErrors = (err: any, res: Response, typeDoc: string) => {
     });
   }
   return res.status(CodesHTTPStatus.DEFAULT).json({
-    message: `Произошла ошибка: ${err}`,
+    message: `На сервере произошла ошибка ${err}`,
   });
 };
 
