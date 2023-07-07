@@ -4,7 +4,7 @@ import {
   ObjectId,
   Types,
 } from 'mongoose';
-import {REGEX} from '../types/constants'
+import { REGEX, card } from '../types/constants';
 
 interface ICard {
   name: string;
@@ -18,8 +18,8 @@ const cardSchema = new Schema({
   name: {
     type: String,
     required: true,
-    minLength: 2,
-    maxLength: 30,
+    minLength: card.name.MIN_LENGTH,
+    maxLength: card.name.MAX_LENGTH,
   },
   link: {
     type: String,
