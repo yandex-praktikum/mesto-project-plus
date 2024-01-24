@@ -39,7 +39,6 @@ const connect = async () => {
   // (временное решение)
   // eslint-disable-next-line no-console
   console.log('Подключились к базе');
-
   // (временное решение)
   // eslint-disable-next-line no-console
   await app.listen(PORT);
