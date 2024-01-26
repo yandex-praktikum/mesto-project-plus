@@ -1,6 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import path from 'path';
 import { SERVER_ERROR_MESSAGE, STATUS_SERVER_ERROR } from './utils/consts';
 import router from './routes';
 
@@ -8,7 +7,6 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   req.user = {
@@ -20,10 +18,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(router);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-  // Логирование ошибки(временное решение)
-  // eslint-disable-next-line no-console
-  console.error(error.message);
-
   // Отправка ответа пользователю
   res.status(error.statusCode || SERVER_ERROR_MESSAGE).json({
     status: 'error',

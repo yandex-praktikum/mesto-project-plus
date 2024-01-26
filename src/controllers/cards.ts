@@ -40,7 +40,7 @@ export const createCard = async (
     if (error instanceof mongoose.Error.ValidationError) {
       return res
         .status(STATUS_BAD_REQUEST)
-        .send({ ...error, message: VALIDATION_ERROR_MESSAGE });
+        .send({ message: VALIDATION_ERROR_MESSAGE });
     }
     return next(error);
   }
