@@ -17,27 +17,21 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 app.use(router);
 
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-  // Отправка ответа пользователю
-  res.status(error.statusCode || SERVER_ERROR_MESSAGE).json({
+app.use((error: any, req: Request, res: Response) => {
+  // Если у ошибки нет статуса, используйте код статуса 500 (Internal Server Error)
+  const statusCode = error.statusCode || SERVER_ERROR_MESSAGE;
+
+  // Отправка ответа пользователю с соответствующим статусом
+  res.status(statusCode).json({
     status: 'error',
     message: error.message || STATUS_SERVER_ERROR,
   });
-  next();
 });
 
 /* mongoose.connect('mongodb://127.0.0.1:27017/mestodb'); */
 const connect = async () => {
   mongoose.set('strictQuery', true);
   await mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-  // (временное решение)
-  // eslint-disable-next-line no-console
-  console.log('Подключились к базе');
-  // (временное решение)
-  // eslint-disable-next-line no-console
   await app.listen(PORT);
-
-  // eslint-disable-next-line no-console
-  console.log('Сервер запущен на порту:', PORT);
 };
 connect();
