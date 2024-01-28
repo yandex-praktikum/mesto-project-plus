@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import mongoose from 'mongoose';
 import Card from '../models/card';
 import NotFoundError from '../utils/notFoundError';
 import {

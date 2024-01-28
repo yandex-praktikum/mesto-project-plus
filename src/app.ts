@@ -19,13 +19,10 @@ app.use(router);
 
 app.use((error: any, req: Request, res: Response) => {
   // Если у ошибки нет статуса, используйте код статуса 500 (Internal Server Error)
-  const statusCode = error.statusCode || SERVER_ERROR_MESSAGE;
+  const statusCode = error.statusCode || STATUS_SERVER_ERROR;
 
   // Отправка ответа пользователю с соответствующим статусом
-  res.status(statusCode).json({
-    status: 'error',
-    message: error.message || STATUS_SERVER_ERROR,
-  });
+  res.status(statusCode).json({ status: 'error', message: error.message || SERVER_ERROR_MESSAGE });
 });
 
 /* mongoose.connect('mongodb://127.0.0.1:27017/mestodb'); */
